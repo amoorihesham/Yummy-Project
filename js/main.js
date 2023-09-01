@@ -186,7 +186,7 @@ function displayAllIngrediantsCards(ingrediants) {
   for (let i = 0; i < newDisplayed.length; i++) {
     cartoona += `<div class="col-md-6 col-xl-3 col-xxl-3">
           <div class="box rounded overflow-hidden position-relative text-center"  onclick="getMealsByMainIngrediants('${ingrediants[i].strIngredient}')">
-              <img src="../imgs/ingrediants.jpg" loading="lazy" class="img-fluid" alt="Sample Photo">
+              <img src="imgs/ingrediants.jpg" loading="lazy" class="img-fluid" alt="Sample Photo">
             <div class="info position-absolute bg-white">
               <h3>${ingrediants[i].strIngredient}</h3>
             </div>
@@ -214,7 +214,7 @@ function displayAllAreasCards(areas) {
   for (let i = 0; i < newDisplayed.length; i++) {
     cartoona += `<div class="col-md-6 col-xl-3 col-xxl-3">
             <div class="box rounded overflow-hidden position-relative text-center" onclick="getMealsByAreaName('${areas[i].strArea}')">
-                <img src="../imgs/earthplanet.svg" loading="lazy" class="img-fluid" alt="Sample Photo">
+                <img src="imgs/earthplanet.svg" loading="lazy" class="img-fluid" alt="Sample Photo">
               <div class="info position-absolute bg-white">
                 <h3>${areas[i].strArea}</h3>
               </div>
