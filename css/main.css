@@ -10,7 +10,7 @@ body {
   background-color: black;
   overflow: hidden;
 }
-
+/* Customize the whole content page [ Aside, Results ] */
 .aside {
   height: 100vh;
   position: fixed;
@@ -59,7 +59,7 @@ body {
   cursor: pointer;
 }
 @media (max-width: 767px) {
-  .sideBox{
+  .sideBox {
     width: 40px;
   }
   .sideBox .menuIcon svg {
@@ -71,8 +71,6 @@ body {
 }
 /* End SideBar Section */
 /* Content Area */
-.mainContent {
-}
 .mainContent .box:hover .info {
   top: 0;
 }
@@ -87,15 +85,6 @@ body {
 }
 .box {
   cursor: pointer;
-}
-.tags {
-  width: fit-content;
-}
-.text-trncate-me {
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 /* End Content Area */
 
@@ -162,3 +151,13 @@ body {
   }
 }
 /* End Loader Page */
+/* Custome Class*/
+.tags {
+  width: fit-content;
+}
+.text-trncate-me {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

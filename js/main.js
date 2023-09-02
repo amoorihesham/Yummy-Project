@@ -58,7 +58,10 @@ $(document).ready(() => {
     CloseNavbar();
     $(".loading").fadeOut(300);
   });
-
+  $(".contact").click(() => {
+    showContactele();
+    CloseNavbar();
+  });
   async function initFetch() {
     const request = await fetch(
       "https://www.themealdb.com/api/json/v1/1/search.php?s="
@@ -247,7 +250,6 @@ async function searchByName(value) {
   displayCategoryMeals(data);
   $(".loading").fadeOut(300);
 }
-
 async function searchByFirstLetter(value) {
   $(".loading").fadeIn(300);
   const request = await fetch(
@@ -258,6 +260,73 @@ async function searchByFirstLetter(value) {
   displayCategoryMeals(data);
   $(".loading").fadeOut(300);
 }
+
+//Show Conatact Elements
+function showContactele() {
+  let cartoona = `<div class="contact-us w-75 mx-auto">
+  <div class="row mb-3">
+  <div class="col">
+    <input type="text" class="form-control" placeholder="First name" aria-label="First name" id="nameInput" onkeyup="runvalidations()">
+    <div id="nameAlert" class=" alert alert-danger mt-3 d-none">Name Field: 
+    <ul>
+      <li>* Required</li>
+      <li>* Can't Be less Than 4 Chars</li>
+      <li>* Can't Be Empty</li>
+    </ul>
+    </div>
+  </div>
+  <div class="col">
+    <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" id="lastNameInpu" onkeyup="runvalidations()">
+  </div>
+</div>
+<div class="row mb-3">
+  <div class="col">
+    <input type="number" class="form-control" placeholder="Your Phone" aria-label="Your Phone" id="phoneInput" onkeyup="runvalidations()">
+    <div id="phoneAlert" class=" alert alert-danger mt-3 d-none">Phone Field: 
+    <ul>
+      <li>* Required</li>
+      <li>* Can't Be less Than 12 Digit</li>
+      <li>* Can't Be Empty</li>
+    </ul>
+    </div>
+  </div>
+  <div class="col">
+    <input type="number" class="form-control" placeholder="Your Age" aria-label="Your Age" id="ageInput" onkeyup="runvalidations()">
+    <div id="ageAlert" class=" alert alert-danger mt-3 d-none">Age Field: 
+    <ul>
+      <li>* Required</li>
+      <li>* Can't Be Empty</li>
+    </ul>
+    </div>
+  </div>
+</div>
+<div class="row mb-3">
+  <div class="col">
+    <input type="email" class="form-control" placeholder="Your Email" aria-label="Your Email" id="emailInput" onkeyup="runvalidations()">
+    <div id="emailAlert" class=" alert alert-danger mt-3 d-none">Email Field: 
+    <ul>
+      <li>* Required</li>
+      <li>* Must Be valid Email</li>
+      <li>* Can't Be Empty</li>
+    </ul>
+    </div>
+  </div>
+  <div class="col">
+    <input type="password" class="form-control" placeholder="Your Password" aria-label="Your Password" id="passwordInput" onkeyup="runvalidations()">
+    <div id="passwordAlert" class=" alert alert-danger mt-3 d-none">Password Field: 
+    <ul>
+      <li>* Required</li>
+      <li>* Must Contains Special Char and Numbers</li>
+      <li>* Can't Be Less Than 6 digits Or More Than 16 Digits</li>
+    </ul>
+    </div>
+  </div>
+</div>
+<button disabled class="btn btn-danger" type="submit" id="btn-send"> Submit</button>
+  </div>`;
+  mainContentArea.innerHTML = cartoona;
+}
+
 // Global Handlers
 function CloseNavbar() {
   $(".aside").animate({
@@ -275,4 +344,92 @@ function OpenNavbar() {
   $(".menuIcon svg").addClass("fa-x");
   $(".menuIcon svg").removeClass("fa-bars");
   $(".slider .links li").addClass("show");
+}
+
+function runvalidations() {
+  if (!nameValidation()) {
+    document.getElementById("nameAlert").classList.replace("d-none", "d-block");
+  } else {
+    document.getElementById("nameAlert").classList.replace("d-block", "d-none");
+  }
+
+  if (!passwordValidation()) {
+    document
+      .getElementById("passwordAlert")
+      .classList.replace("d-none", "d-block");
+  } else {
+    document
+      .getElementById("passwordAlert")
+      .classList.replace("d-block", "d-none");
+  }
+
+  if (!emailValidation()) {
+    document
+      .getElementById("emailAlert")
+      .classList.replace("d-none", "d-block");
+  } else {
+    document
+      .getElementById("emailAlert")
+      .classList.replace("d-block", "d-none");
+  }
+
+  if (!ageValidation()) {
+    document.getElementById("ageAlert").classList.replace("d-none", "d-block");
+  } else {
+    document.getElementById("ageAlert").classList.replace("d-block", "d-none");
+  }
+
+  if (!phoneValidation()) {
+    document
+      .getElementById("phoneAlert")
+      .classList.replace("d-none", "d-block");
+  } else {
+    document
+      .getElementById("phoneAlert")
+      .classList.replace("d-block", "d-none");
+  }
+
+  const submit = document.getElementById("btn-send");
+  submit.addEventListener("click", (e) => {
+    e.preventDefault();
+  });
+  if (
+    nameValidation() &&
+    emailValidation() &&
+    phoneValidation() &&
+    ageValidation() &&
+    passwordValidation()
+  ) {
+    submit.removeAttribute("disabled");
+  } else {
+    submit.setAttribute("disabled", true);
+  }
+}
+
+function nameValidation() {
+  return /^[a-zA-Z ]{4,8}$/.test(document.getElementById("nameInput").value);
+}
+
+function emailValidation() {
+  return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+    document.getElementById("emailInput").value
+  );
+}
+
+function passwordValidation() {
+  return /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(
+    document.getElementById("passwordInput").value
+  );
+}
+
+function phoneValidation() {
+  return /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(
+    document.getElementById("phoneInput").value
+  );
+}
+
+function ageValidation() {
+  return /^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|200)$/.test(
+    document.getElementById("ageInput").value
+  );
 }
